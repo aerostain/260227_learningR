@@ -1,8 +1,21 @@
 # 260227
 
+## Comados R aprendidos hoy - lista
+
+* `str() %>% capture.output() %>% writeLines("str_sl.txt")`
+* `apply_labels`
+* `var_lab`
+* `val_lab`
+* `as.labelled`
+* `add_labelled_class`
+* `attributes`
+* `sapply`
+* `cross_cases`
+* `is.null`
+
 ## Comados R aprendidos hoy - resumen
 
-* Todas las variables en Spss son númericas, incluso los factores (preguntas cerradas). Las variables de caracteres en Spss son de texto (preguntas abiertas).
+* En Spss todas las variables cuantitativas o factores son preguntas cerradas (num) y las variables correspondientes a preguntas abiertas son de texto (character).
 
 ```r
 # Creamos dataframe
@@ -70,7 +83,7 @@ sl %>%
 sl %>% count(DEPARTAMENTO)
 ```
 
-* Identificar cuales variables tienen var_labels.
+* Identificar cuales variables tienen val_labels. Recuerda `sapply` aplica una función a cada columan de un data.frame y simplifica la salida.
 ```r
 # Crear funciones
 ver_label <- \(x){
@@ -100,5 +113,5 @@ c <- sl %>%
   sapply(ver_valuelabels) %>%
   as.logical()
 
-tibble(Id = seq_len(length(a)), Preg = a, VarLabels = c, Texto = b) %>% filter(VarLabels==TRUE) %>% view
+pregs <- tibble(Id = seq_len(length(a)), Preg = a, VarLabels = c, Texto = b)
 ```

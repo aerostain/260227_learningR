@@ -27,6 +27,18 @@ text <- c(
 pathfile <- file.path(getwd(), ".lintr")
 writeLines(text, pathfile)
 
+
+system("git init")
+system("git status")
+file.create(".gitignore")
+system("git add .")
+system("git commit -m 'Init'")
+system("git log --oneline")
+system("git remote add repos https://github.com/aerostain/260227_learningR.git")
+
+system("git push repos master")
+
+
 # ---------------------------------------------------------------------
 # Repaso
 # ---------------------------------------------------------------------
@@ -106,14 +118,17 @@ b <- sl %>%
   sapply(extraer_label) %>%
   as.character()
 
-c <- sl %>% sapply(ver_valuelabels)
+c <- sl %>%
+  sapply(ver_valuelabels) %>%
+  as.logical()
 
-tibble(Id = seq_len(length(a)), Preg = a, Texto = b) %>% view()
+pregs <- tibble(Id = seq_len(length(a)), Preg = a, VarLabels = c, Texto = b)
 
-sl$P40_3 %>%
-  val_lab() %>%
-  is.null()
+pregs %>% view()
 
-sl$P40_3_TIEMPO %>%
-  val_lab() %>%
-  is.null()
+pregs %>%
+  filter(VarLabels == TRUE) %>%
+  view()
+
+sl %>% cross_cases(P34)
+
